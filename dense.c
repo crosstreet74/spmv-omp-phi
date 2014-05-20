@@ -78,10 +78,6 @@ MATRIX* ReadMatrix(FILE *file) {
 	return m;
 }
 
-int WriteMatrixInner(FILE *file, int* I, int* J, double* val) {
-    
-}
-
 int WriteMatrix(FILE *file, MATRIX* reM) {
     MM_typecode matcode;
     int i, jjj, k;
