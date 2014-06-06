@@ -1,3 +1,8 @@
+//
+//  blocked.c
+//  
+//  Created by Hussian Alamri on April 2013
+//
 
 #include "blocked.h"
 
@@ -76,7 +81,7 @@ BCRS* CreateBCRS(MATRIX* my_m) {
 }
 
 void PrintBCRS(BCRS *c) {
-    
+    printf("To-Do: Not implemented");
 }
 
 void MultiplyBCRS(BCRS *c, double *x, double *r) {
@@ -111,11 +116,11 @@ void MultiplyBCRS(BCRS *c, double *x, double *r) {
 }
 
 void DestroyBCRS(BCRS *cc) {
-	free(cc->colInd);
-	free(cc->rowPtr);
-	free(cc->value);
+    free(cc->colInd);
+    free(cc->rowPtr);
+    free(cc->value);
     free(cc->nnzPtr);
-	free(cc);
+    free(cc);
 }
 
 
@@ -153,10 +158,9 @@ ELL* CreateELL(MATRIX *m) {
     int max_entries_per_row = compute_max_entries_per_row(m);
     
     values = (double**) malloc(m->nrows * sizeof(double*));
-    //values = (double**) _mm_malloc(m->nrows * sizeof(double*));
+
     for (i = 0; i < m->nrows; ++i) {
         values[i] = (double*) malloc(max_entries_per_row * sizeof(double));
-        //values[i] = (double*) _mm_malloc(max_entries_per_row * sizeof(double));
     }
     
     indices = (int**) malloc(m->nrows * sizeof(int*));
@@ -175,7 +179,6 @@ ELL* CreateELL(MATRIX *m) {
         jj = 0;
         for (j = 0; j < ncols; ++j) {
             if(mal[i][j] != 0) {
-                // copy mal[i][j] to values[i][jj]
                 values[i][jj] = mal[i][j];
                 indices[i][jj] = j;
                 jj++;               // less than or equal to max_entries_per_row
@@ -195,7 +198,7 @@ ELL* CreateELL(MATRIX *m) {
 
 
 void PrintELL(ELL *e) {
-    
+    printf("To-Do: Not implemented");
 }
 
 
@@ -226,11 +229,9 @@ void DestroyELL(ELL* c) {
     
     for (i = 0; i < m->nrows; ++i) {
         free(m->mel[i]);
-        //_mm_free(m->mel[i]);
     }
     
     free(c->values);
-    //_mm_free(c->values);
     free(c->indices);
     free(c);
 }
