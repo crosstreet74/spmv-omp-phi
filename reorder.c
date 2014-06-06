@@ -1,9 +1,7 @@
 //
 //  reorder.c
 //  
-//
-//  Created by Husain on 11/11/13.
-//
+//  Created by Hussian Alamri on November 2013
 //
 
 #include <stdio.h>
@@ -22,16 +20,12 @@ void column_intersection(double** input, double** output, int nrows, int ncols) 
     int row_length = ncols;
     
     int *intersection = (int *)malloc(ncols*sizeof(int));
-    //int *permutation = (int *)malloc(ncols*sizeof(int));
     
     for (j = 0; j < ncols; ++j) {
         intersection[j] = 0;
-        //permutation[j] = 0;
     }
     
     ijk = 0;
-    
-    //permutation[ijk] = 0;
     P[ijk] = 0;       // choice of 1st column effects resulting reorder
     
     while (ijk < ncols-1) {
@@ -39,7 +33,6 @@ void column_intersection(double** input, double** output, int nrows, int ncols) 
         for (j = 0; j < ncols; ++j) {
             for (i = 0; i < nrows; ++i) {
                 if (input[i][j] != 0) {
-                    //if (input[i][permutation[ijk]] != 0) {
                     if (input[i][P[ijk]] != 0) {
                         intersection[j]++;
                     }
@@ -51,7 +44,6 @@ void column_intersection(double** input, double** output, int nrows, int ncols) 
         #pragma omp parallel for default(shared) private(ij)
         for (ij = 0; ij < ncols; ++ij) {
             /* if max_pos is in permutation find next max */
-            //if(exists(permutation, ncols, max_pos)) { /* find next max */
             if(exists(P, ncols, max_pos)) { /* find next max */
                 intersection[max_pos] = -1;
                 max_pos = findMax(intersection, ncols);
@@ -59,8 +51,7 @@ void column_intersection(double** input, double** output, int nrows, int ncols) 
         }
         
         ijk++;
-        printf("%d\r", ijk);
-        //permutation[ijk] = max_pos;
+
         P[ijk] = max_pos;
         
         /* reset intersection weights */
@@ -70,13 +61,6 @@ void column_intersection(double** input, double** output, int nrows, int ncols) 
         }
     }  // while-loop done
     
-//    for (i = 0; i < column_length; ++i) {
-//        for (j = 0; j < row_length; ++j) {
-//            output[i][j] = input[i][permutation[j]];
-//        }
-//    }
-    
-    //free(permutation);
     free(intersection);
     
     return;
@@ -95,7 +79,9 @@ void gray_code(double** A, int* C, int rowIndex, int sign, int nrows, int ncols)
     i1 = 0;
     i2 = 0;
     
-    //    printf("ncols %d, nrows %d, rowIndex %d, sign %d\n", ncols, nrows, rowIndex, sign);
+    #ifdef LOG
+    printf("ncols %d, nrows %d, rowIndex %d, sign %d\n", ncols, nrows, rowIndex, sign);
+    #endif
     
     if (rowIndex == nrows || ncols <= 1) {
         for (jj = 0; jj < ncols; ++jj) {
@@ -111,7 +97,6 @@ void gray_code(double** A, int* C, int rowIndex, int sign, int nrows, int ncols)
     for (ijk = 0; ijk < ncols; ++ijk) {
         C1[ijk] = -1;
         C2[ijk] = -1;
-        //P[ijk] = -1;
     }
     
     /* partition C into two disjoint sets C1 and C2 such that C1 contains all column indices that have nonzeros in rowIndex and C2 contains the other indices */
