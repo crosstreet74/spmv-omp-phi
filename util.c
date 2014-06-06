@@ -1,3 +1,8 @@
+//
+//  util.c
+//  
+//  Created by Hussian Alamri on September 2012
+//
 
 #include "util.h"
 
