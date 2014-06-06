@@ -17,7 +17,7 @@ MATRIX* ReadMatrix(FILE *file) {
     
     
     /*  This is how one can screen matrix types if their application */
-    /*  only supports a subset of the Matrix Market data types.      *
+    /*  only supports a subset of the Matrix Market data types.      */
     
     if (mm_is_complex(matcode) && mm_is_matrix(matcode) &&
         mm_is_sparse(matcode) )
@@ -78,7 +78,7 @@ MATRIX* ReadMatrix(FILE *file) {
 	return m;
 }
 
-int WriteMatrix(FILE *file, MATRIX* reM) {
+void WriteMatrix(FILE *file, MATRIX* reM) {
     MM_typecode matcode;
     int i, jjj, k;
     int nz = reM->nnz;
@@ -90,18 +90,8 @@ int WriteMatrix(FILE *file, MATRIX* reM) {
     int N = nrows;
     int M = ncols;
 
-
-    mm_initialize_typecode(&matcode);
-    mm_set_matrix(&matcode);
-    mm_set_coordinate(&matcode);
-    mm_set_real(&matcode);
-
-    mm_write_banner(file, matcode);
-    mm_write_mtx_crd_size(file, M, N, nz);
-
-
     k = 0;    
-    while (k < nz) { // test this
+    while (k < nz) {
         for (i = 0; i < nrows; ++i) {
             for (jjj = 0; jjj < ncols; ++jjj) {
                 if((double)reM->mel[i][jjj] != (double)0) {
@@ -115,13 +105,13 @@ int WriteMatrix(FILE *file, MATRIX* reM) {
         break;
     } // end while
     
-    /*mm_initialize_typecode(&matcode);
+    mm_initialize_typecode(&matcode);
     mm_set_matrix(&matcode);
     mm_set_coordinate(&matcode);
     mm_set_real(&matcode);
     
     mm_write_banner(file, matcode);
-    mm_write_mtx_crd_size(file, M, N, nz); */
+    mm_write_mtx_crd_size(file, M, N, nz);
     
     /* NOTE: matrix market files use 1-based indices, i.e. first element
      of a vector has index 1, not 0.  */
@@ -131,15 +121,15 @@ int WriteMatrix(FILE *file, MATRIX* reM) {
     
     fflush(file);
     
+    #ifdef LOG
     printf("Closing file...\n");
+    #endif
     
     fclose(file);
     
     free(I);
     free(J);
     free(val);
-    
-	return 1; // success
 }
 
 double DotProduct(const double *a, const double *b, int n) {
@@ -161,9 +151,9 @@ double* MultiplyMatrix(MATRIX *m, double *val) {
                  s,
 		 s1;
     int nrows = m->nrows;
-	int ncols = m->ncols;
+    int ncols = m->ncols;
     double*  r = malloc(ncols * sizeof(double));
-	double**  mal = m->mel;
+    double**  mal = m->mel;
     double        result;
     
     #pragma omp parallel for private(s)
