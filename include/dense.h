@@ -22,7 +22,7 @@ typedef struct MATRIX {
 
 
 MATRIX*      ReadMatrix(FILE *file);
-int          WriteMatrix(FILE *file, MATRIX *m);
+void         WriteMatrix(FILE *file, MATRIX *m);
 double       DotProduct(const double *a, const double *b, int n);
 double*      MultiplyMatrix(MATRIX *m, double *v);
 void         PrintMatrix(MATRIX *m);
