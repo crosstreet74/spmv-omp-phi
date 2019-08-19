@@ -114,15 +114,15 @@ int main(int argc, char **argv)
 {
     char *fileName;
     usage(argc, argv, &fileName);
-
+    /*
 #if DEBUG
     fprintf(stderr, "HB file name: %s\n", fileName);
     read_info(fileName);
 #endif
-
+    */
     int ret;
     MM_typecode matcode;
-    FILE *fp;
+    FILE *fp = fopen(fileName, "r");
     int m;
     int n;
     int nnz;
@@ -130,9 +130,12 @@ int main(int argc, char **argv)
     int *I;
     int *J;
     double *val;
+    MATRIX* mtx = ReadMatrix(fp);
 
     ret = mm_read_mtx_crd(fileName, &m, &n, &nnz, &I, &J, &val, &matcode);
     check_mm_ret(ret);
+
+    /*
 #if DEBUG
     fprintf(stdout, "First 10 non-zeros\n");
     for (int i = 0; i < 10; i++)
@@ -146,6 +149,7 @@ int main(int argc, char **argv)
                 val[nnz - 1 - i]);
     }
 #endif
+*/
 
     free(I);
     free(J);
