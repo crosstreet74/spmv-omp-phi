@@ -49,6 +49,6 @@ void         DestroyBCRS(BCRS *cc);
 ELL*         CreateELL(MATRIX *m);
 void         PrintELL(ELL *c);
 void         MultiplyELL(ELL* e, double* x, double* r);
-void         DestroyELL(ELL* c);
+void         DestroyELL(ELL* c, MATRIX *m);
 
 #endif

@@ -1,7 +1,7 @@
 cc = gcc
 
 # ping pong example using MPI_Send and MPI_Recv
-sources = mmio.c sparse.c dense.c util.c reorder.c main.c
+sources = mmio.c sparse.c dense.c util.c blocked.c reorder.c main.c
 objects = $(addsuffix .o, $(basename $(sources)))
 
 flags = -g -std=gnu11 -fopenmp -DDEBUG=1 -Iinclude

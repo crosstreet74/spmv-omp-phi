@@ -224,7 +224,7 @@ void MultiplyELL(ELL* e, double* x, double* r) {
     }
 }
 
-void DestroyELL(ELL* c) {
+void DestroyELL(ELL* c, MATRIX *m) {
     int i;
     
     for (i = 0; i < m->nrows; ++i) {
