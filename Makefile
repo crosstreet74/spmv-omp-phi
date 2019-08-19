@@ -4,7 +4,7 @@ cc = gcc
 sources = mmio.c sparse.c dense.c util.c reorder.c main.c
 objects = $(addsuffix .o, $(basename $(sources)))
 
-flags = -g -std=c11 -fopenmp -DDEBUG=1 -Iinclude
+flags = -g -std=gnu11 -fopenmp -DDEBUG=1 -Iinclude
 
 target = hb_load
 

@@ -5,6 +5,7 @@
 //
 
 #include "util.h"
+#include <sys/time.h>
 
 double dtime() {
     double tseconds = 0.0;
