@@ -11,4 +11,4 @@
  
 export OMP_NUM_THREADS=$SLURM_CPUS_PER_TASK
  
-./hb_load
+./hb_load arc130/arc130.mtx

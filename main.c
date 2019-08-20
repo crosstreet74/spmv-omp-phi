@@ -3,6 +3,7 @@
 #include <string.h>
 #include <assert.h>
 #include "mmio.h"
+#include "blocked.h"
 
 void usage(int argc, char **argv, char **fileName)
 {
